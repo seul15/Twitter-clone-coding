@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+button{
+  @apply focus:outline-none;
+} /*모든 버튼의 테두리를 없애줌*/
