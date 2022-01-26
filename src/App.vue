@@ -100,18 +100,17 @@
     <!-- main section -->
     <div class="flex-1 flex h-screen">
         <!-- 스크린 높이에 맞춤 -->
-      <Notifications/>
-      <Trends/>
+      <Messages/>
     </div>
     <!-- w-3/4로 나머지 부분을 선택해도 되고 flex-1 -->
   </div>
 </template>
 
 <script>
+import Messages from './pages/Messages.vue'
 import Notifications from './pages/Notifications.vue'
-import Trends from './components/Trends.vue'
 export default {
-  components:{Trends,Notifications},
+  components:{Notifications,Messages},
   setup(){},
 }
 </script>
