@@ -1,10 +1,11 @@
 <template>
   <!-- <h1 class="text-lg bg-gray-900 text-white ml-10 mt-4 pl-3 pt-3 hover:bg-gray-600 hover:text-red-600 ">hello world</h1>  -->
   <!-- bg - 배경 text - 텍스트 색 ml - 왼쪽 마진 mt - 위쪽 마진 pl - 왼쪽 여백 pt - 위쪽 여백 hover 마우스 올렸을 경우-->
-  <div class="flex h-screen">
+  <div class="flex h-screen container mx-auto">
+    <!-- container - 화면의 크기가 일정 이상으로 늘어났을때 여백이 존재  / mx-auto - 여백이 오른쪽 왼쪽에 고루 존재-->
     <!-- side section -->
     <!-- h-screen으로 높이는 화면 전체로 선택 -->
-    <div class="w-1/4 pt-5 ml-10 flex flex-col justify-between border-r border-gray-100">
+    <div class="w-20 lg:w-1/4 pt-5 lg:ml-10 flex flex-col justify-between border-r border-gray-100">
     <!-- justify-between - div 사이에 내용들을 일정한 간격으로 띄어놓음 -->
       <div class="flex flex-col items-center lg:items-start">
         <!-- lg: - 화면이 확장됬을때를 의미 -->
@@ -13,50 +14,50 @@
         <!-- sidemenu icons -->
         <div class="flex flex-col items-start space-y-1">
           <!-- flex-col은 가로로 정렬 / items-start는 텍스트와 이미지만 적용 / space-y-1은 아이콘 사이에 간격을 1씩 부여-->
-          <div class="hover:text-primary hover:bg-blue-50 px-4 py-2 rounded-full">
+          <div class="hover:text-primary hover:bg-blue-50 px-4 py-2 rounded-full cursor-pointer">
             <!-- px는 왼쪽 오른쪽에 padding / py는 위쪽 아래쪽에 padding / rounded-full 테두리 둥글게-->
             <i class="fas fa-home fa-fw text-2xl"></i>
             <!-- 홈 버튼 / fa-fw 너비를 일정히-->
             <span class="ml-5 text-lg hidden lg:inline-block">홈</span>
             <!-- hidden lg:inline-block는 화면 크기에 따라 글을 숨김 -->
           </div>
-          <div class="hover:text-primary hover:bg-blue-50 px-4 py-2 rounded-full">
+          <div class="hover:text-primary hover:bg-blue-50 px-4 py-2 rounded-full cursor-pointer">
             <!-- px는 왼쪽 오른쪽에 padding / py는 위쪽 아래쪽에 padding / rounded-full 테두리 둥글게-->
             <i class="fas fa-hashtag fa-fw text-2xl"></i>
             <!-- 홈 버튼 -->
             <span class="ml-5 text-lg hidden lg:inline-block">탐색하기</span>
           </div>
-          <div class="hover:text-primary hover:bg-blue-50 px-4 py-2 rounded-full">
+          <div class="hover:text-primary hover:bg-blue-50 px-4 py-2 rounded-full cursor-pointer">
             <!-- px는 왼쪽 오른쪽에 padding / py는 위쪽 아래쪽에 padding / rounded-full 테두리 둥글게-->
             <i class="far fa-bell fa-fw text-2xl"></i>
             <!-- 홈 버튼 -->
             <span class="ml-5 text-lg hidden lg:inline-block">알림</span>
           </div>
-          <div class="hover:text-primary hover:bg-blue-50 px-4 py-2 rounded-full">
+          <div class="hover:text-primary hover:bg-blue-50 px-4 py-2 rounded-full cursor-pointer">
             <!-- px는 왼쪽 오른쪽에 padding / py는 위쪽 아래쪽에 padding / rounded-full 테두리 둥글게-->
             <i class="far fa-envelope fa-fw text-2xl"></i>
             <!-- 홈 버튼 -->
             <span class="ml-5 text-lg hidden lg:inline-block">쪽지</span>
           </div>
-          <div class="hover:text-primary hover:bg-blue-50 px-4 py-2 rounded-full">
+          <div class="hover:text-primary hover:bg-blue-50 px-4 py-2 rounded-full cursor-pointer">
             <!-- px는 왼쪽 오른쪽에 padding / py는 위쪽 아래쪽에 padding / rounded-full 테두리 둥글게-->
             <i class="far fa-bookmark fa-fw text-2xl"></i>
             <!-- 홈 버튼 -->
             <span class="ml-5 text-lg hidden lg:inline-block">북마크</span>
           </div>
-          <div class="hover:text-primary hover:bg-blue-50 px-4 py-2 rounded-full">
+          <div class="hover:text-primary hover:bg-blue-50 px-4 py-2 rounded-full cursor-pointer">
             <!-- px는 왼쪽 오른쪽에 padding / py는 위쪽 아래쪽에 padding / rounded-full 테두리 둥글게-->
             <i class="far fa-list-alt fa-fw text-2xl"></i>
             <!-- 홈 버튼 -->
             <span class="ml-5 text-lg hidden lg:inline-block">리스트</span>
           </div>
-          <div class="hover:text-primary hover:bg-blue-50 px-4 py-2 rounded-full">
+          <div class="hover:text-primary hover:bg-blue-50 px-4 py-2 rounded-full cursor-pointer">
             <!-- px는 왼쪽 오른쪽에 padding / py는 위쪽 아래쪽에 padding / rounded-full 테두리 둥글게-->
             <i class="far fa-user fa-fw text-2xl"></i>
             <!-- 홈 버튼 -->
             <span class="ml-5 text-lg hidden lg:inline-block">프로필</span>
           </div>
-          <div class="hover:text-primary hover:bg-blue-50 px-4 py-2 rounded-full">
+          <div class="hover:text-primary hover:bg-blue-50 px-4 py-2 rounded-full cursor-pointer">
             <!-- px는 왼쪽 오른쪽에 padding / py는 위쪽 아래쪽에 padding / rounded-full 테두리 둥글게-->
             <i class="fas fa-ellipsis-h fa-fw text-2xl"></i>
             <!-- 홈 버튼 -->
