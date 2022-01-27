@@ -14,55 +14,55 @@
         <!-- sidemenu icons -->
         <div class="flex flex-col items-start space-y-1">
           <!-- flex-col은 가로로 정렬 / items-start는 텍스트와 이미지만 적용 / space-y-1은 아이콘 사이에 간격을 1씩 부여-->
-          <div class="hover:text-primary hover:bg-blue-50 px-4 py-2 rounded-full cursor-pointer">
+          <router-link to="/" class="hover:text-primary hover:bg-blue-50 px-4 py-2 rounded-full cursor-pointer">
             <!-- px는 왼쪽 오른쪽에 padding / py는 위쪽 아래쪽에 padding / rounded-full 테두리 둥글게-->
             <i class="fas fa-home fa-fw text-2xl"></i>
             <!-- 홈 버튼 / fa-fw 너비를 일정히-->
             <span class="ml-5 text-xl hidden xl:inline-block">홈</span>
             <!-- hidden xl:inline-block는 화면 크기에 따라 글을 숨김 -->
-          </div>
-          <div class="hover:text-primary hover:bg-blue-50 px-4 py-2 rounded-full cursor-pointer">
+          </router-link>
+          <router-link to="/" class="hover:text-primary hover:bg-blue-50 px-4 py-2 rounded-full cursor-pointer">
             <!-- px는 왼쪽 오른쪽에 padding / py는 위쪽 아래쪽에 padding / rounded-full 테두리 둥글게-->
             <i class="fas fa-hashtag fa-fw text-2xl"></i>
             <!-- 홈 버튼 -->
             <span class="ml-5 text-xl hidden xl:inline-block">탐색하기</span>
-          </div>
-          <div class="hover:text-primary hover:bg-blue-50 px-4 py-2 rounded-full cursor-pointer">
+          </router-link>
+          <router-link to="/notifications" class="hover:text-primary hover:bg-blue-50 px-4 py-2 rounded-full cursor-pointer">
             <!-- px는 왼쪽 오른쪽에 padding / py는 위쪽 아래쪽에 padding / rounded-full 테두리 둥글게-->
             <i class="far fa-bell fa-fw text-2xl"></i>
             <!-- 홈 버튼 -->
             <span class="ml-5 text-xl hidden xl:inline-block">알림</span>
-          </div>
-          <div class="hover:text-primary hover:bg-blue-50 px-4 py-2 rounded-full cursor-pointer">
+          </router-link>
+          <router-link to="/messages" class="hover:text-primary hover:bg-blue-50 px-4 py-2 rounded-full cursor-pointer">
             <!-- px는 왼쪽 오른쪽에 padding / py는 위쪽 아래쪽에 padding / rounded-full 테두리 둥글게-->
             <i class="far fa-envelope fa-fw text-2xl"></i>
             <!-- 홈 버튼 -->
             <span class="ml-5 text-xl hidden xl:inline-block">쪽지</span>
-          </div>
-          <div class="hover:text-primary hover:bg-blue-50 px-4 py-2 rounded-full cursor-pointer">
+          </router-link>
+          <router-link to="/" class="hover:text-primary hover:bg-blue-50 px-4 py-2 rounded-full cursor-pointer">
             <!-- px는 왼쪽 오른쪽에 padding / py는 위쪽 아래쪽에 padding / rounded-full 테두리 둥글게-->
             <i class="far fa-bookmark fa-fw text-2xl"></i>
             <!-- 홈 버튼 -->
             <span class="ml-5 text-xl hidden xl:inline-block">북마크</span>
-          </div>
-          <div class="hover:text-primary hover:bg-blue-50 px-4 py-2 rounded-full cursor-pointer">
+          </router-link>
+          <router-link to="/" class="hover:text-primary hover:bg-blue-50 px-4 py-2 rounded-full cursor-pointer">
             <!-- px는 왼쪽 오른쪽에 padding / py는 위쪽 아래쪽에 padding / rounded-full 테두리 둥글게-->
             <i class="far fa-list-alt fa-fw text-2xl"></i>
             <!-- 홈 버튼 -->
             <span class="ml-5 text-xl hidden xl:inline-block">리스트</span>
-          </div>
-          <div class="hover:text-primary hover:bg-blue-50 px-4 py-2 rounded-full cursor-pointer">
+          </router-link>
+          <router-link to="/profile" class="hover:text-primary hover:bg-blue-50 px-4 py-2 rounded-full cursor-pointer">
             <!-- px는 왼쪽 오른쪽에 padding / py는 위쪽 아래쪽에 padding / rounded-full 테두리 둥글게-->
             <i class="far fa-user fa-fw text-2xl"></i>
             <!-- 홈 버튼 -->
             <span class="ml-5 text-xl hidden xl:inline-block">프로필</span>
-          </div>
-          <div class="hover:text-primary hover:bg-blue-50 px-4 py-2 rounded-full cursor-pointer">
+          </router-link>
+          <router-link to="/" class="hover:text-primary hover:bg-blue-50 px-4 py-2 rounded-full cursor-pointer">
             <!-- px는 왼쪽 오른쪽에 padding / py는 위쪽 아래쪽에 padding / rounded-full 테두리 둥글게-->
             <i class="fas fa-ellipsis-h fa-fw text-2xl"></i>
             <!-- 홈 버튼 -->
             <span class="ml-5 text-xl hidden xl:inline-block">더보기</span>
-          </div>
+          </router-link>
         </div>
         <!-- tweet button -->
         <div class="w-full xl:pr-3 flex justify-center"> 
@@ -100,17 +100,14 @@
     <!-- main section -->
     <div class="flex-1 flex h-screen">
         <!-- 스크린 높이에 맞춤 -->
-      <Profile/>
+      <router-view/>
     </div>
     <!-- w-3/4로 나머지 부분을 선택해도 되고 flex-1 -->
   </div>
 </template>
 
 <script>
-import Profile from './pages/Profile.vue'
 export default {
-  components:{Profile},
-  setup(){},
 }
 </script>
 

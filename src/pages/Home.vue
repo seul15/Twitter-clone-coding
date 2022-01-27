@@ -19,7 +19,7 @@
       </div>
     </div>
     <!-- tweets -->
-    <Tweet/>
+    <Tweet v-for="tweet in 20" :key="tweet"/>
   </div>
   <!-- trend part -->
   <Trends/>  
