@@ -25,7 +25,15 @@
       placeholder="비밀번호"
     />
     <button
-      class="w-96 rounded-full bg-primary text-white py-4 hover:bg-dark"
+      v-if="loading"
+      class="w-96 rounded bg-light text-white py-3"
+      @click="onRegister"
+    >
+      회원가입 중입니다.
+    </button>
+    <button
+      v-else
+      class="w-96 rounded bg-primary text-white py-3 hover:bg-dark"
       @click="onRegister"
     >
       회원가입
@@ -38,24 +46,42 @@
 
 <script>
 import { ref } from "vue";
-import { auth } from "../firebase";
+import { auth, USER_COLLECTION } from "../firebase";
+import { useRouter } from "vue-router";
+
 export default {
   setup() {
     const username = ref("");
     const email = ref("");
     const password = ref("");
     const loading = ref(false);
+    const router = useRouter();
 
     const onRegister = async () => {
       try {
-        const credential = await auth.createUserWithEmailAndPassword(
+        loading.value = true;
+        const { user } = await auth.createUserWithEmailAndPassword(
           email.value,
           password.value
         );
-        console.log(credential);
+        const doc = USER_COLLECTION.doc(user.uid);
+        await doc.set({
+          uid: user.uid,
+          email: email.value,
+          profile_image_url: "./profile.jpeg",
+          num_tweets: 0,
+          followers: [],
+          followings: [],
+          created_at: Date.now(),
+        });
+        alert("회원 가입에 성공하셨습니다. 로그인 해주세요.");
+        router.push("/login"); //화면 이동
       } catch (e) {
         //console.log('create user with email and password error:',e)
         alert(e.message);
+      } finally {
+        //try의 결과에 상관없이 실행
+        loading.value = false;
       }
     };
     return { email, username, password, loading, onRegister };
