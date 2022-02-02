@@ -37,9 +37,10 @@
 </template>
 
 <script>
-import { ref } from "vue";
-import { auth } from "../firebase";
+import { ref, onMounted } from "vue";
+import { auth, USER_COLLECTION } from "../firebase";
 import { useRouter } from "vue-router";
+import store from "../store";
 export default {
   setup() {
     const email = ref("");
@@ -47,6 +48,9 @@ export default {
     const loading = ref(false);
     const router = useRouter();
 
+    onMounted(() => {
+      console.log(store.state.user);
+    });
     const onLogin = async () => {
       if (!email.value || !password.value) {
         alert("이메일, 비밀번호를 모두 입력해주세요.");
@@ -59,8 +63,13 @@ export default {
           email.value,
           password.value
         );
-        console.log(user.uid);
-        router.replace("/"); //replace를 통해서 뒤로가기를 해도 로그인 페이지가 나오지 않도록
+
+        // get user info
+        const doc = await USER_COLLECTION.doc(user.uid).get();
+        store.commit("SET_USER", doc.data());
+        console.log(store.state.user);
+
+        //router.replace("/"); //replace를 통해서 뒤로가기를 해도 로그인 페이지가 나오지 않도록
       } catch (e) {
         switch (e.code) {
           case "auth/invalid-email":
