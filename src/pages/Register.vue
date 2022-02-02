@@ -19,6 +19,7 @@
       placeholder="이메일"
     />
     <input
+      @keyup.enter="onRegister"
       v-model="password"
       type="password"
       class="rounded w-96 px-4 py-3 border border-gray-300 focus:ring-2 focus:border-primary focus:outline-none"
