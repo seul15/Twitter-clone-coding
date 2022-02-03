@@ -38,7 +38,12 @@
       </div>
     </div>
     <!-- tweets -->
-    <Tweet v-for="tweet in 20" :key="tweet" :currentUser="currentUser" />
+    <Tweet
+      :currentUser="currentUser"
+      :tweet="tweet"
+      v-for="tweet in tweets"
+      :key="tweet.id"
+    />
   </div>
   <!-- trend part -->
   <Trends />
@@ -47,7 +52,7 @@
 <script>
 import Trends from "../components/Trends.vue";
 import Tweet from "../components/Tweet.vue";
-import { ref, computed } from "vue";
+import { ref, computed, onBeforeMount } from "vue";
 import store from "../store";
 import { TWEET_COLLECTION } from "../firebase";
 
@@ -56,6 +61,21 @@ export default {
   setup() {
     const tweetBody = ref("");
     const currentUser = computed(() => store.state.user);
+    const tweets = ref([]);
+
+    onBeforeMount(() => {
+      TWEET_COLLECTION.orderBy("created_at", "desc").onSnapshot((snapshot) => {
+        snapshot.docChanges().forEach((change) => {
+          if (change.type === "added") {
+            tweets.value.splice(change.newIndex, 0, change.doc.data());
+          } else if (change.type === "modified") {
+            tweets.value.splice(change.oldIndex, 1, change.doc.data());
+          } else if (change.type === "removed") {
+            tweets.value.splice(change.oldIndex, 1);
+          }
+        });
+      });
+    });
 
     const onAddTweet = async () => {
       try {
@@ -75,7 +95,7 @@ export default {
       }
     };
 
-    return { currentUser, tweetBody, onAddTweet };
+    return { currentUser, tweetBody, onAddTweet, tweets };
   },
 };
 </script>

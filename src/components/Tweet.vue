@@ -9,26 +9,28 @@
     <div class="ml-3 flex-1 flex flex-col space-y-1">
       <div class="text-sm space-x-1">
         <!-- space-x-1 - 각각의 요소 사이마다 간격을 줌 -->
-        <span class="font-bold">닉네임</span>
-        <span class="text-gray-500 text-xs">@아이디</span>
+        <span class="font-bold">{{ tweet.uid }}</span>
+        <span class="text-gray-500 text-xs">@{{ tweet.uid }}</span>
         <span>.</span>
-        <span class="text-gray-500 text-xs">시간</span>
+        <span class="text-gray-500 text-xs">{{
+          moment(tweet.created_at).fromNow()
+        }}</span>
       </div>
       <!-- tweet body -->
-      <div>대충 내용~~~~</div>
+      <div>{{ tweet.tweet_body }}</div>
       <!-- tweet actions -->
       <div class="flex justify-between">
         <div class="text-gray-500 hover:text-primary">
           <i class="far fa-comment hover:bg-blue-50 rounded-full p-2"></i>
-          <span class="ml-1 text-sm">1</span>
+          <span class="ml-1 text-sm">{{ tweet.num_comments }}</span>
         </div>
         <div class="text-gray-500 hover:text-green-500">
           <i class="fas fa-retweet hover:bg-green-50 rounded-full p-2"></i>
-          <span class="ml-1 text-sm">2</span>
+          <span class="ml-1 text-sm">{{ tweet.num_retweets }}</span>
         </div>
         <div class="text-gray-500 hover:text-red-500">
           <i class="far fa-heart hover:bg-red-50 rounded-full p-2"></i>
-          <span class="ml-1 text-sm">3</span>
+          <span class="ml-1 text-sm">{{ tweet.num_likes }}</span>
         </div>
         <div class="text-gray-500 hover:text-primary">
           <i class="far fa-share-square hover:bg-blue-50 rounded-full p-2"></i>
@@ -39,8 +41,12 @@
 </template>
 
 <script>
+import moment from "moment";
 export default {
-  props: ["currentUser"],
+  props: ["currentUser", "tweet"],
+  setup() {
+    return { moment };
+  },
 };
 </script>
 
