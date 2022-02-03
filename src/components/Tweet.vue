@@ -1,6 +1,11 @@
 <template>
-  <div class="flex px-3 py-3 border-b border-gray-100 hover:bg-gray-50 cursor-pointer">
-    <img src="http://picsum.photos/200" class="w-10 h-10 rounded-full hover:opacity-80 cursor-pointer"/>
+  <div
+    class="flex px-3 py-3 border-b border-gray-100 hover:bg-gray-50 cursor-pointer"
+  >
+    <img
+      :src="currentUser.profile_image_url"
+      class="w-10 h-10 rounded-full hover:opacity-80 cursor-pointer"
+    />
     <div class="ml-3 flex-1 flex flex-col space-y-1">
       <div class="text-sm space-x-1">
         <!-- space-x-1 - 각각의 요소 사이마다 간격을 줌 -->
@@ -24,10 +29,10 @@
         <div class="text-gray-500 hover:text-red-500">
           <i class="far fa-heart hover:bg-red-50 rounded-full p-2"></i>
           <span class="ml-1 text-sm">3</span>
-        </div>                
+        </div>
         <div class="text-gray-500 hover:text-primary">
           <i class="far fa-share-square hover:bg-blue-50 rounded-full p-2"></i>
-        </div>                                           
+        </div>
       </div>
     </div>
   </div>
@@ -35,10 +40,8 @@
 
 <script>
 export default {
-
-}
+  props: ["currentUser"],
+};
 </script>
 
-<style>
-
-</style>
+<style></style>
