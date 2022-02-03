@@ -18,7 +18,11 @@
           <!-- flex-col은 가로로 정렬 / items-start는 텍스트와 이미지만 적용 / space-y-1은 아이콘 사이에 간격을 1씩 부여-->
           <router-link
             :to="route.path"
-            class="hover:text-primary hover:bg-blue-50 px-4 py-2 rounded-full cursor-pointer"
+            :class="`hover:text-primary hover:bg-blue-50 px-4 py-2 rounded-full cursor-pointer ${
+              router.currentRoute.value.name == route.name
+                ? 'text-primary'
+                : ' '
+            }`"
             v-for="route in routes"
             :key="route"
           >
@@ -54,10 +58,15 @@
           class="hidden xl:flex mt-3 px-2 py-1 w-full h-12 rounded-full hover:bg-blue-50 items-center"
         >
           <!-- flex를 통해서 하나로 묶는다고 볼 것 / items-center 밑의 태그들을 중간에 배치 -->
-          <img src="http://picsum.photos/10" class="w-10 h-10 rounded-full" />
+          <img
+            :src="currentUser.profile_image_url"
+            class="w-10 h-10 rounded-full"
+          />
           <div class="xl:ml-2 hidden xl:block">
-            <div class="text-sm font-bold">seul.com</div>
-            <div class="text-xs text-gray-500 text-left">@seul</div>
+            <div class="text-sm font-bold">{{ currentUser.email }}</div>
+            <div class="text-xs text-gray-500 text-left">
+              @{{ currentUser.username }}
+            </div>
           </div>
           <i class="ml-auto fas fa-ellipsis-h fa-fw text-xs"></i>
         </button>
@@ -65,7 +74,7 @@
         <div class="xl:hidden flex justify-center">
           <!-- 화면이 커질때 프로필 상태 -->
           <img
-            src="http://picsum.photos/10"
+            :src="currentUser.profile_image_url"
             class="w-10 h-10 rounded-full cursor-pointer hover:opacity-80"
           />
           <!-- cursor-pointer - 커서를 올렸을때 포인터로 바뀜 / opacity - 투명도 -->
@@ -88,10 +97,15 @@
       <button
         class="hover:bg-gray-50 border-b border-gray-100 flex p-3 w-full items-center"
       >
-        <img src="http://picsum.photos/200" class="w-10 h-10 rounded-full" />
-        <div>
-          <div class="font-bold text-sm">닉네임</div>
-          <div class="text-left text-gray-500 text-sm">@이메일</div>
+        <img
+          :src="currentUser.profile_image_url"
+          class="w-10 h-10 rounded-full"
+        />
+        <div class="ml-2">
+          <div class="font-bold text-sm">{{ currentUser.email }}</div>
+          <div class="text-left text-gray-500 text-sm">
+            @{{ currentUser.username }}
+          </div>
         </div>
         <i class="fas fa-check text-primary ml-auto"></i>
       </button>
@@ -99,7 +113,7 @@
         class="p-3 w-full text-left text-sm hover:bg-gray-50"
         @click="onLogout"
       >
-        @닉네임 계정에서 로그아웃
+        @{{ currentUser.username }} 계정에서 로그아웃
       </button>
     </div>
   </div>
@@ -107,7 +121,7 @@
 
 <script>
 // 메뉴 router 연결
-import { ref, onBeforeMount } from "vue";
+import { ref, onBeforeMount, computed } from "vue";
 import router from "../router";
 import { auth } from "../firebase";
 import store from "../store";
@@ -116,6 +130,9 @@ export default {
   setup() {
     const routes = ref([]);
     const showProfileDropdown = ref(false);
+
+    const currentUser = computed(() => store.state.user);
+
     const onLogout = async () => {
       await auth.signOut();
       store.commit("SET_USER", null);
@@ -125,7 +142,7 @@ export default {
       routes.value = router.options.routes;
     });
 
-    return { routes, showProfileDropdown, onLogout };
+    return { routes, showProfileDropdown, currentUser, onLogout, router };
   },
 };
 </script>
