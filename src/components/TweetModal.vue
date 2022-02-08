@@ -20,7 +20,7 @@
         </div>
         <!-- tweeting section -->
         <div class="flex p-4">
-          <img src="http://picsum.photos/100" class="w-10 h-10 rounded-full hover:opacity-80 cursor-pointer"/>
+          <img :src="currentUser.profile_image_url" class="w-10 h-10 rounded-full hover:opacity-80 cursor-pointer"/>
           <div class="ml-2 flex-1 flex-col">
             <textarea v-model="tweetBody" rows="5" placeholder="무슨 일이 일어나고 있나요?" class="w-full text-lg font-bold focus:outline-none resize-none"></textarea>
             <!-- 안드로이드 스튜디오에서 texthint 같은 느낌 -->
@@ -37,13 +37,26 @@
   </div>
 </template>
 <script>
-import {ref} from 'vue'
+import {ref, computed} from 'vue'
+import addTweet from "../utils/addTweet";
+import store from "../store";
+
 export default {
-  setup(){
+  setup(props,{emit}){
     const tweetBody = ref('')
+    const currentUser = computed(()=>store.state.user)
+    const onAddTweet = async () => {
+      try {
+        await addTweet(tweetBody.value,currentUser.value);
+        tweetBody.value='';
+        emit('close-modal')
+      } catch (e) {
+        console.log("on add tweet error on homepage:", e);
+      }
+    };
 
     return{
-      tweetBody,
+      tweetBody, onAddTweet, currentUser
     }
   }
 }
