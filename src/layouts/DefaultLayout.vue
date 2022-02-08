@@ -42,7 +42,8 @@
           <!-- justify - 가로축 items - 세로축 -->
           <!-- 오른쪽에 마진을 3을 줌 -->
           <button
-            class="mt-3 bg-primary text-white xl:w-full w-12 h-12 rounded-full hover:bg-dark focus:outline-none"
+            @click="showTweetModal=true"
+              class="mt-3 bg-primary text-white xl:w-full w-12 h-12 rounded-full hover:bg-dark focus:outline-none"
           >
             <span class="hidden xl:block">트윗</span>
             <i class="fas fa-plus xl:hidden"></i>
@@ -117,6 +118,9 @@
       </button>
     </div>
   </div>
+
+<!--  tweet modal popup -->
+  <tweet-modal v-if="showTweetModal" @close-modal="showTweetModal = false"></tweet-modal>
 </template>
 
 <script>
@@ -125,11 +129,14 @@ import { ref, onBeforeMount, computed } from "vue";
 import router from "../router";
 import { auth } from "../firebase";
 import store from "../store";
+import TweetModal from "../components/TweetModal.vue";
 
 export default {
+  components: {TweetModal},
   setup() {
     const routes = ref([]);
     const showProfileDropdown = ref(false);
+    const showTweetModal = ref(false);
 
     const currentUser = computed(() => store.state.user);
 
@@ -142,7 +149,7 @@ export default {
       routes.value = router.options.routes.filter((route) => route.meta.isMenu == true);
     });
 
-    return { routes, showProfileDropdown, currentUser, onLogout, router };
+    return { routes, showProfileDropdown, showTweetModal,currentUser, onLogout, router };
   },
 };
 </script>
